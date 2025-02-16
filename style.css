@@ -35,21 +35,21 @@ body {
 }
 
 .navbar ul {
-    /* 
-          Remove bullet points.
-    */
-    list-style: none;
-    width: 500px;
-    margin: 0 auto;
-    /* 
-          No padding.
-    */
-    padding: 0;
-    /* 
-          For navbars use background color that stands out.
-    */
-    background-color: blue;
-    text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      list-style: none;
+      width: 500px;
+      margin: 0 auto;
+      /* 
+            No padding.
+       */
+      padding: 0;
+      /* 
+            For navbars use background color that stands out.
+      */
+      background-color: blue;
+      text-align: center;
   }
 
   .navbar li {
@@ -71,5 +71,16 @@ body {
   .navbar a {
     color: #fff;
     text-decoration: none;
+  }
+  
+  .content {
+      display: flex;
+      flex-wrap: wrap; 
+      justify-content: space-around;  
+      align-items: flex-start; 
+  }
+  
+  .content div {
+      width: 45%; 
   }
   
