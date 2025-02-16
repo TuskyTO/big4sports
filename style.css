@@ -2,7 +2,27 @@ body {
       text-align: center;
   }
   
-  
+#title {
+      font-weight: bold;
+      text-decoration: underline;
+      background-color: red;
+}
+
+#NBA {
+      color: orange;
+}
+
+#NFL {
+      color: green;
+}
+
+#MLB {
+      color: red;
+}
+
+#NHL {
+      color: blue;
+}
 
 .images {
       width: 75%;  
