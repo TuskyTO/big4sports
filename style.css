@@ -25,10 +25,13 @@ body {
 }
 
 .images {
-      width: 75%;  
+      width: 100%;  
+      max-width: 500px;  
       height: auto;  
-      max-width: 500px; 
+      display: block; 
+      margin: 0 auto;  
   }
+  
 
 .navbar {
     background-color: red;
