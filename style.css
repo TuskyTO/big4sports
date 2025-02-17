@@ -23,12 +23,13 @@ body {
 #NHL {
       color: blue;
 }
-
-.images {
-      border: 2px solid black;
-  }
   
-
+  .images {
+      border: 2px solid black;
+      max-width: 100%;
+      height: auto;
+    }
+    
 .navbar {
     background-color: red;
 }
