@@ -84,3 +84,22 @@ body {
       width: 45%; 
   }
   
+  .iframe {
+      position: relative;
+      width: 100%; /* Makes sure the iframe container is as wide as its parent */
+      max-width: 600px; /* Prevents it from getting too large on big screens */
+      margin: 0 auto; /* Centers the iframe */
+  }
+  
+  .iframe iframe {
+      width: 100%; /* Ensures the iframe scales with its container */
+      height: 300px; /* Adjust the height as needed */
+      border: none; /* Removes the border */
+  }
+  
+  @media (max-width: 600px) {
+      .iframe iframe {
+          height: 200px; /* Reduces the height for smaller screens */
+      }
+  }
+  
