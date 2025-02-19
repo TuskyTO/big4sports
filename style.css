@@ -1,44 +1,43 @@
 .navbar {
-      background-color: #b22234; /* Strong USA Red */
-      padding: 10px 0;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: red;
+}
+
+.navbar ul {
+    /* 
+          Remove bullet points.
+    */
+    list-style: none;
+    width: 500px;
+    margin: 0 auto;
+    /* 
+          No padding.
+    */
+    padding: 0;
+    /* 
+          For navbars use background color that stands out.
+    */
+    background-color: blue;
+    text-align: center;
   }
-  
-  .navbar ul {
-      list-style: none;
-      margin: 0 auto;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      background-color: #3c3b6e; /* USA Navy Blue */
-      border-radius: 8px;
-      padding: 10px;
-  }
-  
+
   .navbar li {
-      background-color: white;
-      border-radius: 5px;
-      padding: 10px 20px;
-      transition: all 0.3s ease-in-out;
+    width: 150 px;
+    background-color: #000;
+    border: 10px solid white;
+    /* 
+          Show the navbar elements next to each other instead of on top of each 
+          other. 
+    */
+    padding: 10px;
+    display: inline-block;
+    line-height: 40px;
   }
   
-  /* Style links */
+  /* 
+      Style links in navbar.
+  */
   .navbar a {
-      color: #b22234; /* USA Red */
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: color 0.3s ease-in-out;
-  }
-  
-  /* Hover effect */
-  .navbar li:hover {
-      background-color: #b22234; /* Red on hover */
-  }
-  
-  .navbar li:hover a {
-      color: white;
+    color: #fff;
+    text-decoration: none;
   }
   
