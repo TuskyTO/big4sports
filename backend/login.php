@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 $conn->close();
 ?>
 
-<!-- Minimal HTML form for login -->
+
 <form method="POST" action="login.php">
   <input type="text" name="username" placeholder="Username" required>
   <input type="password" name="password" placeholder="Password" required>
