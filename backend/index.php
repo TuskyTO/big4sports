@@ -54,7 +54,7 @@ if ($result && $result->num_rows > 0) {
         
         // Action column: always show "View"
         echo "<td>";
-        echo "<a href='view_trivia.php?id=" . $row['id'] . "'>View</a>";
+        echo "<a href='read_trivia.php?id=" . $row['id'] . "'>View</a>";
         
         // If the logged-in user is the quiz owner, show Update/Delete
         if (isset($_SESSION['username']) && $_SESSION['username'] === $row['username']) {
