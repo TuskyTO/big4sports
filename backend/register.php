@@ -66,11 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <h1> Registration </h1>
 
-<body>
-    <p>If you do not already have an account <a href='register.php'>Click here to Register</a> 
-</p>
 
-<body>
 
 <form method="POST" action="register.php">
   <label>Username: <input type="text" name="username" required></label><br>
@@ -78,3 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <label>Confirm Password: <input type="password" name="password2" required></label><br>
   <button type="submit">Register</button>
 </form>
+
+<body>
+    <p>If you already have an account <a href='login.php'>Click here to Login</a> 
+</p>
+
+<body>
