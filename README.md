@@ -30,11 +30,13 @@ Below are steps to install our app:
 
 2.  We have a main folder "big4sports" which contains our front-end HTML files, as well as a subfolder "backend" which contains all of our php files such as index.php, db_connect.php, create_trivia.php, etc. The frontend in the big4sports folder is the scaffolding for the landing page and the additional html pages that you can access from it. Our backend folder contains all the files needed for our database and CRUD applications.
    
-3. To test our app, the user needs to place the entire "big4sports" folder in the "htdocs" folder of their XAMPP.
+3. To test our app, the user needs to copy and paste the entire "big4sports" folder in the "htdocs" folder of their XAMPP.
 
 4. The user must open their XAMPP control panel and make sure that Apache and MySQL are running.
 
-5. We have provided the app-db.sql file with the existing databases. To use this, you must select the app-db database on your phpMyAdmin, then select "import", then click the file app-db.sql that you have from our cloned repository. This will provide you with the most updated version of our database.
+5. We have provided the app-db.sql file with the existing databases. To use this, you must:
+   a. create a database called "app-db" on your local phpMyAdmin
+   b. select the app-db database on your phpMyAdmin, then select "import", then click the file app-db.sql that you have from our cloned repository. This will provide you with the most updated version of our database.
 
 6. Final step: Open your browser, visit "localhost/”. From here should see the big4sports folder. Then, you can open our backend folder and access our index.php file. 
 
