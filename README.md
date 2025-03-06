@@ -51,5 +51,7 @@ As you navigate through the final step, you should see the following pages:
 
 <img width="1440" alt="Screenshot 2025-03-06 at 1 55 07 PM" src="https://github.com/user-attachments/assets/494b44cf-f133-441f-b544-0ba54e90cf2d" />
 
+Percentage Breakdown: 50/50 between Charlie and Elliot
 
+A little more on our version control: We used main for production-ready code, and feature-specific branches for each big change or problem that we had with our existing code. We merged them via pull requests.
 
