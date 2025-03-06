@@ -64,6 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 
+<h1> Registration </h1>
+
+<body>
+    <p>If you do not already have an account <a href='register.php'>Click here to Register</a> 
+</p>
+
+<body>
+
 <form method="POST" action="register.php">
   <label>Username: <input type="text" name="username" required></label><br>
   <label>Password (min 10 chars): <input type="password" name="password" required></label><br>
