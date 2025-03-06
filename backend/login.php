@@ -34,8 +34,14 @@ $conn->close();
 ?>
 
 
+
 <form method="POST" action="login.php">
-  <input type="text" name="username" placeholder="Username" required>
-  <input type="password" name="password" placeholder="Password" required>
-  <button type="submit">Login</button>
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Login</button>
 </form>
+
+<p>If you do not already have an account, <a href="register.php">Click here to Register</a>.</p>
+
+</body>
+</html>
