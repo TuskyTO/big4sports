@@ -13,5 +13,8 @@ The work was completed 50/50 by both teammates Charlie and Elliot.
 
 NOTE: Certain google chrome extensions negatively affect our websites lighthouse report. Please compelete the lighthouse report on an incognito tab to ensure accurate testing. 
 
+Below are screenshots of the local phpMyAdmin interfaces for each team member:
 
 ![Image 2-26-25 at 10 03 PM](https://github.com/user-attachments/assets/d6550815-cc63-4b72-84f5-056e4c34483f)
+
+
