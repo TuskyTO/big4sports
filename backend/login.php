@@ -46,9 +46,7 @@ $conn->close();
   <button type="submit">Login</button>
 </form>
 
-<body>
-    <p>If you do not already have an account <a href='register.php'>Click here to Register</a> 
-</p>
 
-<body>
+    <p>If you do not already have an account <a href='register.php'>Click here to Register</a> </p>
+
     
