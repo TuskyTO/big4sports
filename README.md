@@ -40,6 +40,13 @@ Below are steps to install our app:
 
 6. Final step: Open your browser, visit "localhost/”. From here should see the big4sports folder. Then, you can open our backend folder and access our index.php file. 
 
+7. Once you have registered an account, you should be able to:
+   a. Read the existing trivia questions from the existing users via the table and the "View" button on the furthers right column of the table
+   b. Create your own trivia questions via add a "add a new trivia question"
+   c. Update your own trivia questions (ONLY YOURS)
+   d. Delete your own trivia questions (ONLY YOURS)
+   e. Visit our landing page 
+
 As you navigate through these steps, you should see the following pages:
 
 <img width="1440" alt="Screenshot 2025-03-06 at 2 00 55 PM" src="https://github.com/user-attachments/assets/894198c4-6a0b-4a39-9dca-4a6ade1a49d7" />
