@@ -26,7 +26,7 @@ Charlie:
 
 Below are steps to install our app:
 
-1. Clone this repository via "git clone https://github.com/TuskyTO/big4sports.git"
+1. Clone this repository via "git clone https://github.com/TuskyTO/big4sports.git" in your terminal.
 
 2.  We have a main folder "big4sports" which contains our front-end HTML files, as well as a subfolder "backend" which contains all of our php files such as index.php, db_connect.php, create_trivia.php, etc. The frontend in the big4sports folder is the scaffolding for the landing page and the additional html pages that you can access from it. Our backend folder contains all the files needed for our database and CRUD applications.
    
