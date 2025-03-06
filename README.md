@@ -15,7 +15,14 @@ NOTE: Certain google chrome extensions negatively affect our websites lighthouse
 
 Below are screenshots of the local phpMyAdmin interfaces for each team member:
 
+Elliot:
+
 ![Image 2-26-25 at 10 03 PM](https://github.com/user-attachments/assets/d6550815-cc63-4b72-84f5-056e4c34483f)
+
+
+Charlie:
+
+
 
 Below are steps to install our app:
 
