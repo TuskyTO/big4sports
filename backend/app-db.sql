@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2025 at 03:10 AM
+-- Generation Time: Mar 05, 2025 at 05:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,6 +35,14 @@ CREATE TABLE `trivia` (
   `difficulty` int(1) NOT NULL CHECK (`difficulty` between 1 and 10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `trivia`
+--
+
+INSERT INTO `trivia` (`id`, `username`, `trivia_question`, `trivia_answer`, `difficulty`) VALUES
+(1, 'charlieknapp', 'Who won the first NFL Superbowl?', 'Green Bay Packers', 8),
+(2, 'charlieknapp', 'What does NHL stand for?', 'National Hockey League', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +53,14 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`username`, `password`) VALUES
+('charlieknapp', '$2y$10$hzf7s8W150UsHgATvq7B/OAl6kNjR2YqWJ379QJ8aJCYET3w4MyFa'),
+('charlieknapp2', '$2y$10$IcXXUDIYsyqhytA/SQFPBex5TF.ZX6L8i1iIoriNDx4PwRDEH51u2');
 
 --
 -- Indexes for dumped tables
@@ -71,7 +87,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `trivia`
 --
 ALTER TABLE `trivia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
