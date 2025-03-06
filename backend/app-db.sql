@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2025 at 05:24 PM
+-- Generation Time: Mar 06, 2025 at 07:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,9 @@ CREATE TABLE `trivia` (
 
 INSERT INTO `trivia` (`id`, `username`, `trivia_question`, `trivia_answer`, `difficulty`) VALUES
 (1, 'charlieknapp', 'Who won the first NFL Superbowl?', 'Green Bay Packers', 8),
-(2, 'charlieknapp', 'What does NHL stand for?', 'National Hockey League', 1);
+(2, 'charlieknapp', 'What does NHL stand for?', 'National Hockey League', 1),
+(4, 'egoldman', 'Who is the NBA all-time assist leader?', 'John Stockton', 6),
+(5, 'egoldman', 'Who was the first pick in the 2003 NBA draft?', 'Lebron James', 6);
 
 -- --------------------------------------------------------
 
@@ -60,7 +62,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `password`) VALUES
 ('charlieknapp', '$2y$10$hzf7s8W150UsHgATvq7B/OAl6kNjR2YqWJ379QJ8aJCYET3w4MyFa'),
-('charlieknapp2', '$2y$10$IcXXUDIYsyqhytA/SQFPBex5TF.ZX6L8i1iIoriNDx4PwRDEH51u2');
+('charlieknapp2', '$2y$10$IcXXUDIYsyqhytA/SQFPBex5TF.ZX6L8i1iIoriNDx4PwRDEH51u2'),
+('egoldman', '$2y$10$HcqC/NrmtB6GTKMbRqOy1O3nhzxnz6o2h3zbOgAozGMiqgYRYunii');
 
 --
 -- Indexes for dumped tables
@@ -87,7 +90,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `trivia`
 --
 ALTER TABLE `trivia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
