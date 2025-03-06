@@ -63,7 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-
+<html>
+    <body>
 <h1> Registration </h1>
 
 
@@ -75,8 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <button type="submit">Register</button>
 </form>
 
-<body>
+
     <p>If you already have an account <a href='login.php'>Click here to Login</a> 
 </p>
 
 <body>
+</html>
