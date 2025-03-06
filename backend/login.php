@@ -33,11 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 $conn->close();
 ?>
 
-<title>
 
-    Login
 
-</title>
+<h1>   Login  <h1>
+
+
 
 
 <form method="POST" action="login.php">
@@ -47,7 +47,6 @@ $conn->close();
 </form>
 
 <body>
-    If you do not already have an account hre
     <p>If you do not already have an account <a href='register.php'>Click here to Register</a> 
 </p>
 
