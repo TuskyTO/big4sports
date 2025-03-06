@@ -33,10 +33,12 @@ Below are steps to install our app:
 
 As you navigate through the final step, you should see the following pages:
 
+<img width="81" alt="Screenshot 2025-03-06 at 1 46 04 PM" src="https://github.com/user-attachments/assets/68b20649-d0e0-45d4-8121-1dab1ccac027" />
+
+
 <img width="1440" alt="Screenshot 2025-03-06 at 1 46 29 PM" src="https://github.com/user-attachments/assets/d4fe0668-1b50-4937-907b-59036e8b0216" />
 
 
 <img width="1436" alt="Screenshot 2025-03-06 at 1 46 13 PM" src="https://github.com/user-attachments/assets/a0d088fb-3734-4c3e-9e24-6110823a9c56" />
 
-<img width="81" alt="Screenshot 2025-03-06 at 1 46 04 PM" src="https://github.com/user-attachments/assets/01f11931-5c1a-4987-ad85-16fefdae0374" />
 
