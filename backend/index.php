@@ -11,7 +11,7 @@ require 'db_connect.php'; // Contains $conn with valid DB credentials
 <body>
 
 <a
-    href="landing.html"
+    href="../landing.html"
     >For more information on Big4Sports click here</a>
 
 <?php
