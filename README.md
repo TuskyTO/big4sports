@@ -49,5 +49,7 @@ As you navigate through the final step, you should see the following pages:
 
 <img width="1440" alt="Screenshot 2025-03-06 at 1 55 25 PM" src="https://github.com/user-attachments/assets/71ddea68-94cf-4824-a3f2-9507080b249c" />
 
+<img width="1440" alt="Screenshot 2025-03-06 at 1 55 07 PM" src="https://github.com/user-attachments/assets/494b44cf-f133-441f-b544-0ba54e90cf2d" />
+
 
 
