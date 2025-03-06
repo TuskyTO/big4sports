@@ -10,6 +10,10 @@ require 'db_connect.php'; // Contains $conn with valid DB credentials
 </head>
 <body>
 
+<a
+    href="../landing.html"
+    >For more information on Big4Sports click here</a>
+
 <?php
 // Check if user is logged in
 if (isset($_SESSION['username'])) {
