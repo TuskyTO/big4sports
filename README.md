@@ -38,7 +38,12 @@ Below are steps to install our app:
 
 6. Final step: Open your browser, visit "localhost/”. From here should see the big4sports folder. Then, you can open our backend folder and access our index.php file. 
 
-As you navigate through the final step, you should see the following pages:
+As you navigate through these steps, you should see the following pages:
+
+<img width="1440" alt="Screenshot 2025-03-06 at 2 00 55 PM" src="https://github.com/user-attachments/assets/894198c4-6a0b-4a39-9dca-4a6ade1a49d7" />
+
+<img width="1440" alt="Screenshot 2025-03-06 at 2 00 44 PM" src="https://github.com/user-attachments/assets/fe118bc6-796e-4b6a-bbb9-547bb8cf02ff" />
+
 
 <img width="1438" alt="Screenshot 2025-03-06 at 1 45 55 PM" src="https://github.com/user-attachments/assets/0c42e098-0363-472a-b9d6-ec650285a4be" />
 
