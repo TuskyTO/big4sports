@@ -2,37 +2,37 @@
 session_start();
 require 'db_connect.php';
 
-// 1. If the user is already logged in, redirect them. 
+// If the user is already logged in, redirect them
 if (isset($_SESSION['username'])) {
     header("Location: index.php");
     exit;
 }
 
-// 2. If the form has been submitted (method = POST), process the registration.
+// If the form has been submitted process registration.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
 
-    // 3. Basic validation: make sure none of the fields are empty
+    //  Make sure none of the fields are empty
     if (empty($username) || empty($password) || empty($password2)) {
         echo "All fields are required!";
         exit; // stop here
     }
 
-    // 4. Check password length
+    // Check password length
     if (strlen($password) < 10) {
         echo "Password must be at least 10 characters.";
         exit;
     }
 
-    // 5. Check if the two password inputs match
+    // Check if the two password inputs match
     if ($password !== $password2) {
         echo "Passwords do not match!";
         exit;
     }
 
-    // 6. Check if the username is already taken (using parameterized queries to prevent SQL injection)
+    // Check if the username is already taken 
     $stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -44,10 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $stmt->close();
 
-    // 7. Hash the password using password_hash()
+    // Hash the password using password_hash()
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // 8. Insert the new user into the database
+    // Insert the new user into the database
     $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
     $stmt->bind_param("ss", $username, $hashedPassword);
     if ($stmt->execute()) {
