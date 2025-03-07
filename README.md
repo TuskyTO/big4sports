@@ -49,6 +49,8 @@ Below are steps to install our app:
    d. Delete your own trivia questions (ONLY YOURS)
    e. Visit our landing page
 
+NOTE: Instead of installing our app locally you can also access through our infinityfree website link below.
+
 LINK TO OUR WEB APP ON INFINITY FREE: https://big4sports.kesug.com/
 
 As you navigate through these steps, you should see the following pages:
