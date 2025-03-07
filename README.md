@@ -22,6 +22,8 @@ Elliot:
 
 Charlie:
 
+<img width="1465" alt="Screenshot 2025-02-26 at 10 04 18 PM" src="https://github.com/user-attachments/assets/6b335513-9050-4268-b1c9-a48a38b1454c" />
+
 
 
 Below are steps to install our app:
