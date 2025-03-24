@@ -13,6 +13,16 @@ The work was completed 50/50 by both teammates Charlie and Elliot.
 
 NOTE: Certain google chrome extensions negatively affect our websites lighthouse report. Please compelete the lighthouse report on an incognito tab to ensure accurate testing. 
 
+
+
+
+
+
+_________________________________________________________________________________________________________________________________________________________________________________________
+Hw2:
+
+
+
 Below are screenshots of the local phpMyAdmin interfaces for each team member:
 
 Elliot:
@@ -74,4 +84,25 @@ As you navigate through these steps, you should see the following pages:
 Percentage Breakdown: 50/50 between Charlie and Elliot
 
 A little more on our version control: We used main for production-ready code, and feature-specific branches for each big change or problem that we had with our existing code. We merged them via pull requests.
+
+
+
+
+
+
+
+________________________________________________________________________________________________________________________________________________________________________________________
+Hw3:
+
+Screenshots for Postman testing of POST, PUT, GET, DELETE:
+![Image 3-24-25 at 11 44 AM](https://github.com/user-attachments/assets/07a9fa8b-15ec-49b9-85c9-78a9913c970f)
+
+![Image 3-24-25 at 11 44 AM](https://github.com/user-attachments/assets/c26b4c20-cd94-4b26-a2ab-c9955b79786a)
+
+![Image 3-24-25 at 11 47 AM](https://github.com/user-attachments/assets/2b606fbd-a1e6-4d52-bfb3-6a7740ac778f)
+
+![Image 3-24-25 at 11 47 AM](https://github.com/user-attachments/assets/53fc8681-69e7-4c62-bf8b-645f69f2299c)
+
+
+
 
