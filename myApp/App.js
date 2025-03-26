@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
-import ReadScreencreen from './screens/ViewScreen';
+import ReadScreen from './screens/ReadScreen';
 import CreateScreen from './screens/CreateScreen';
 import UpdateScreen from './screens/UpdateScreen';
 import DeleteScreen from './screens/DeleteScreen';
