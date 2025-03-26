@@ -95,6 +95,8 @@ ________________________________________________________________________________
 Hw3:
 
 Screenshots for Postman testing of POST, PUT, GET, DELETE:
+
+Elliot screenshots:
 ![Image 3-24-25 at 11 44 AM](https://github.com/user-attachments/assets/07a9fa8b-15ec-49b9-85c9-78a9913c970f)
 
 ![Image 3-24-25 at 11 44 AM](https://github.com/user-attachments/assets/c26b4c20-cd94-4b26-a2ab-c9955b79786a)
@@ -102,6 +104,11 @@ Screenshots for Postman testing of POST, PUT, GET, DELETE:
 ![Image 3-24-25 at 11 47 AM](https://github.com/user-attachments/assets/2b606fbd-a1e6-4d52-bfb3-6a7740ac778f)
 
 ![Image 3-24-25 at 11 47 AM](https://github.com/user-attachments/assets/53fc8681-69e7-4c62-bf8b-645f69f2299c)
+
+Charlie screenshots:
+<img width="1470" alt="Screenshot 2025-03-25 at 8 55 50 PM" src="https://github.com/user-attachments/assets/6487d195-8727-4ad5-b7d2-7fcdd95a96af" />
+
+<img width="1470" alt="Screenshot 2025-03-25 at 8 53 42 PM" src="https://github.com/user-attachments/assets/2a694645-fb80-4b87-bc32-de085a0907dd" />
 
 REST API EXPLANATION:
 
