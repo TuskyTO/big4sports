@@ -7,7 +7,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     // Fetch trivia on component mount
-    axios.get('http://10.0.2.2/myApp/api_trivia.php')
+    axios.get('http://10.0.2.2/big4sports/backend/api_trivia.php')
       .then(response => {
         setTriviaList(response.data);
       })
