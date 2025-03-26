@@ -127,9 +127,14 @@ The backend setup directions are the same from Hw2. They are as follows:
 
 - MOBILE FRONTEND:
 1. IF NEEDED, repeat steps 1-5 of the BACKEND instructions.
-2. Make sure you are in the correct directory "myApp"
-3. Enter command "npm install" in the terminal
-4. 
+2. Make sure you have Android Studio downloaded
+3. Open Android Studio and click the dropdown "More Actions" option
+4. Open virtual device manager
+5. Add a device (preferably ___________________)
+6. In terminal, make sure you are in the correct directory "myApp"
+7. Enter command "npm install" in the terminal
+8. Enter command "npm start" in the terminal
+9. Click "a" as shown in terminal to activate app in Android emulator 
 
 
 Screenshots for Postman testing of POST, PUT, GET, DELETE:
