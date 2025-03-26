@@ -103,6 +103,18 @@ Screenshots for Postman testing of POST, PUT, GET, DELETE:
 
 ![Image 3-24-25 at 11 47 AM](https://github.com/user-attachments/assets/53fc8681-69e7-4c62-bf8b-645f69f2299c)
 
+REST API EXPLANATION:
 
+Our data model (trivia) has the following fields:
+
+- id (int) – Auto-increment primary key.
+
+- username (string) – The user who created the trivia.
+
+- trivia_question (string) – The question prompt.
+
+- trivia_answer (string) – The correct answer to that question.
+
+- difficulty (int) – An integer from 1 to 10.
 
 
