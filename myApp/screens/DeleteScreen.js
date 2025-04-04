@@ -9,7 +9,7 @@ export default function DeleteScreen({ route, navigation }) {
   const handleDelete = () => {
     // Send DELETE request
     axios
-      .delete(`http://10.0.2.2/myApp/api_trivia.php?id=${id}`)
+      .delete(`http://10.0.2.2/big4sports/backend/api_trivia.php?id=${id}`)
       .then((res) => {
         console.log('Delete response:', res.data);
         // Go back or navigate to your list screen
