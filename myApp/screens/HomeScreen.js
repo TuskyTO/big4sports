@@ -70,6 +70,11 @@ export default function HomeScreen({ navigation, route }) {
       <Text>Created By: {item.username}</Text>
 
       <View style={styles.buttonRow}>
+         {/* Read button */}
+        <Button
+          title="Read"
+          onPress={() => navigation.navigate('ReadTrivia', { id: item.id })}
+        />
         {/* Conditionally render buttons if the logged-in user is the creator */}
         {loggedInUser === item.username && (
           <>

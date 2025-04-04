@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
 
-export default function ViewTriviaScreen({ route, navigation }) {
+export default function ReadScreen({ route, navigation }) {
   const { id } = route.params;
   const [trivia, setTrivia] = useState(null);
   const [error, setError] = useState('');
-  // Assume loggedInUser is obtained from your auth context or passed as a prop
-  const loggedInUser = 'Alice'; // Replace with your actual logged-in user value
+  const { loggedInUser } = route.params;
 
   useEffect(() => {
     axios.get(`http://10.0.2.2/big4sports/backend/api_trivia.php?id=${id}`)
