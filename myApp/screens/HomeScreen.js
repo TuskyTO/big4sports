@@ -9,15 +9,16 @@ import {
 } from 'react-native';
 import axios from 'axios';
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
+  const { loggedInUser } = route.params || {};
   const [triviaList, setTriviaList] = useState([]);
   const [error, setError] = useState('');
 
-  useEffect(() => {
+ useEffect(() => {
     if (!loggedInUser) {
-      navigation.navigate('Login');
+     navigation.navigate('Login');
     }
-  }, [loggedInUser]);
+}, [loggedInUser]);
   
 
   useEffect(() => {
@@ -69,17 +70,20 @@ export default function HomeScreen({ navigation }) {
       <Text>Created By: {item.username}</Text>
 
       <View style={styles.buttonRow}>
-        {/* Update button */}
-        <Button
-          title="Update"
-          onPress={() => navigation.navigate('UpdateTrivia', { id: item.id })}
-        />
-        {/* Delete button */}
-        <Button
-          title="Delete"
-          color="red"
-          onPress={() => handleDelete(item.id)}
-        />
+        {/* Conditionally render buttons if the logged-in user is the creator */}
+        {loggedInUser === item.username && (
+          <>
+            <Button
+              title="Update"
+              onPress={() => navigation.navigate('UpdateTrivia', { id: item.id })}
+            />
+            <Button
+              title="Delete"
+              color="red"
+              onPress={() => handleDelete(item.id)}
+            />
+          </>
+        )}
       </View>
     </View>
   );
@@ -95,7 +99,7 @@ export default function HomeScreen({ navigation }) {
       {/* Button to create a new trivia item */}
       <Button
         title="Create New Trivia"
-        onPress={() => navigation.navigate('CreateTrivia')}
+        onPress={() => navigation.navigate('CreateTrivia', { loggedInUser})}
       />
 
       <FlatList

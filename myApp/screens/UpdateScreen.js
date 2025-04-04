@@ -14,7 +14,7 @@ export default function UpdateScreen({ route, navigation }) {
   useEffect(() => {
     // 1. Fetch existing trivia item to populate fields
     axios
-      .get(`http://10.0.2.2/myApp/api_trivia.php?id=${id}`)
+      .get(`http://10.0.2.2/big4sports/backend/api_trivia.php?id=${id}`)
       .then((response) => {
         if (response.data) {
           setQuestion(response.data.trivia_question);
@@ -29,7 +29,7 @@ export default function UpdateScreen({ route, navigation }) {
   const handleUpdate = () => {
     // 2. Send PUT request with updated fields
     axios
-      .put(`http://10.0.2.2/myApp/api_trivia.php?id=${id}`, {
+      .put(`http://10.0.2.2/big4sports/backend/api_trivia.php?id=${id}`, {
         trivia_question: question,
         trivia_answer: answer,
         difficulty: parseInt(difficulty, 10),

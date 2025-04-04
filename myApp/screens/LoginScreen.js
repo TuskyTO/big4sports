@@ -13,7 +13,7 @@ export default function LoginScreen({ navigation }) {
       return;
     }
     setLoading(true);
-    axios.post('http://10.0.2.2/big4sports/backend/api_users.php', {
+    axios.post('http://10.0.2.2/big4sports/backend/api_trivia.php', {
       action: 'login',
       username,
       password
@@ -23,7 +23,7 @@ export default function LoginScreen({ navigation }) {
       if (response.data.success) {
         // Store user data as needed (e.g., in Context or AsyncStorage)
         // Navigate to HomeScreen upon successful login
-        navigation.navigate('Home', { username });
+        navigation.navigate('Home', { loggedInUser: username });
       } else {
         Alert.alert('Login Failed', response.data.error || 'Invalid credentials');
       }

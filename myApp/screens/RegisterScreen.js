@@ -22,7 +22,7 @@ export default function RegisterScreen({ navigation }) {
       return;
     }
     setLoading(true);
-    axios.post('http://10.0.2.2/big4sports/backend/api_users.php', {
+    axios.post('http://10.0.2.2/big4sports/backend/api_trivia.php', {
       action: 'register',
       username,
       password
