@@ -137,7 +137,7 @@ The backend setup directions are the same from Hw2. They are as follows:
 9. Enter command "npm start" in the terminal
 10. Click "a" as shown in terminal to activate app in Android emulator
 11. You will now be pushed to a login page. If you have an existing account, login with those details. Or, create a new account by clicking "Register"
-12. Once you are logged in, you will be able to see all of the existing trivia questions. You can only "update" and "delete" the trivia questions that your user originally created.
+12. Once you are logged in, you will be able to see all of the existing trivia questions. You can only "update" and "delete" the trivia questions that your user originally created. You can "read" any of the trivia questions, even ones that the current user has not created. 
 13. To update one of your existing trivia questions, you must select the update button, change what you desire, and then re-login. You will not see the changes unless you re-login.
 14. If you wish to create a new trivia question, the same re-login applies. You must re-login to see the newly created trivia question. 
 
