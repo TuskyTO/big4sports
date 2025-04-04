@@ -126,7 +126,7 @@ The backend setup directions are the same from Hw2. They are as follows:
    e. Visit our landing page
 
 - MOBILE FRONTEND:
-1. IF NEEDED, repeat steps 1-5 of the BACKEND instructions.
+1. Repeat steps 1-5 of the BACKEND instructions.
 2. Make sure you have Android Studio downloaded
 3. Open Android Studio and click the dropdown "More Actions" option
 4. Open virtual device manager
