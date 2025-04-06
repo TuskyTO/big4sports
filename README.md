@@ -96,9 +96,10 @@ Hw3:
 
 Some notes about our updated file management:
 
-We have created 2 new folders:
+We have created 3 new folders:
 - Images --> for all images on our landing page
 - myApp --> for all files pertaining to our React Native mobile app
+- Screens --> a folder within myApp that contains all of the frontend javascript files
 
 HOW TO SETUP/RUN OUR APP:
 
@@ -113,7 +114,7 @@ The backend setup directions are the same from Hw2. They are as follows:
 4. The user must open their XAMPP control panel and make sure that Apache and MySQL are running.
 
 5. We have provided the app-db.sql file with the existing databases. To use this, you must:
-   a. create a database called "app-db" on your local phpMyAdmin
+   a. create a database called "app-db" on your localhost/phpMyAdmin/
    b. select the app-db database on your phpMyAdmin, then select "import", then click the file app-db.sql that you have from our cloned repository. This will provide you with the most updated version of our database.
 
 6. Final step: Open your browser, visit "localhost/”. From here should see the big4sports folder. Then, you can open our backend folder and access our index.php file. 
@@ -127,7 +128,7 @@ The backend setup directions are the same from Hw2. They are as follows:
 
 - MOBILE FRONTEND:
 1. Repeat steps 1-5 of the BACKEND instructions.
-2. Make sure you have Android Studio downloaded
+2. Make sure you have Android Studio, Node.js, and XAMPP downloaded
 3. Open Android Studio and click the dropdown "More Actions" option
 4. Open virtual device manager
 5. Add a device (whichever you device you desire to test in)
@@ -159,17 +160,22 @@ Charlie screenshots:
 <img width="1470" alt="Screenshot 2025-03-25 at 8 53 42 PM" src="https://github.com/user-attachments/assets/2a694645-fb80-4b87-bc32-de085a0907dd" />
 
 REST API EXPLANATION:
+   We have implemented a REST API into our backend in order to work with the React Native frontend. We have updated our backend php files to return data in JSON format rather than        pure HTML. This makes it easy for a React Native moble app to consume and display the data from our backend. 
 
-Our data model (trivia) has the following fields:
+   Specifically, we modified our existing php scripts to act as API endpoints:
+      - A GET request to /api_trivia.php will return all trivia questions (or a specific trivia question if you give an id#).
+      - A POST request to /api_trivia.php would create a new trivia question.
+      - A PUT request to /api_trivia.php?id=5 would update the trivia record with ID 5.
+      - A DELETE request to /api_trivia.php?id=5 would delete the trivia record with ID 5.
 
-- id (int) – Auto-increment primary key.
+So the way our REST API works:
 
-- username (string) – The user who created the trivia.
+1. Receives the incoming HTTP request.
 
-- trivia_question (string) – The question prompt.
+2. Determines the request method (GET, POST, etc.).
 
-- trivia_answer (string) – The correct answer to that question.
+3. Processes the request (e.g., querying or updating the database).
 
-- difficulty (int) – An integer from 1 to 10.
+4. Returns the data (or an error) as a JSON response.
 
-
+THIS HOMEWORK WAS 50/50 BETWEEN CHARLIE AND ELLIOT 
