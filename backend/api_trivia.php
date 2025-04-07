@@ -1,5 +1,5 @@
 <?php
-// Enable CORS for development (not safe for production)
+// Enable CORS for development 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
@@ -28,12 +28,11 @@ switch ($method) {
         break;
 
     case 'OPTIONS':
-        // Preflight request for CORS
         http_response_code(200);
         exit;
 
     default:
-        // Method not supported
+        // Not supported
         http_response_code(405);
         echo json_encode(["error" => "Method not allowed"]);
         exit;
@@ -41,10 +40,8 @@ switch ($method) {
 
 $conn->close();
 
-/**
+/*
  * Handle GET requests.
- *  - e.g., GET /api_trivia.php?id=5 => single record
- *  - e.g., GET /api_trivia.php => all records
  */
 function handleGet($conn) {
     if (isset($_GET['id'])) {
@@ -69,15 +66,8 @@ function handleGet($conn) {
     }
 }
 
-/**
- * Handle POST requests: create a new record.
- *  - Expects JSON in the request body, e.g.:
- *     {
- *       "username": "Alice",
- *       "trivia_question": "What is 2+2?",
- *       "trivia_answer": "4",
- *       "difficulty": 1
- *     }
+/*
+ * Handle POST requests
  */
 function handlePost($conn) {
     $input = file_get_contents("php://input");
@@ -109,11 +99,8 @@ function handlePost($conn) {
 
 
 
-/**
- * Handle PUT requests: update an existing record.
- *  - Usually requires an `id` param in the query string
- *    e.g. PUT /api_trivia.php?id=5
- *  - Expects JSON in the body for updated fields.
+/*
+ * Handle PUT requests: update an existing record
  */
 function handlePut($conn) {
     // Check if we have an id in the URL
@@ -162,10 +149,9 @@ function handlePut($conn) {
     exit;
 }
 
-/**
+/*
  * Handle DELETE requests: remove an existing record.
- *  - Usually requires an `id` param, e.g. DELETE /api_trivia.php?id=5
- */
+*/
 function handleDelete($conn) {
     if (!isset($_GET['id'])) {
         http_response_code(400);
