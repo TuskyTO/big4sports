@@ -178,4 +178,7 @@ So the way our REST API works:
 
 4. Returns the data (or an error) as a JSON response.
 
+A NOTE ON OUR CORS HEADERS:
+For the purposes of this homework assignment, we're using the wildcard (*) for CORS during development. This allows our React Native app or any other client to access your backend without restriction. While this is fine for development, in a production environment we would want to restrict the allowed origins to only trusted domains (e.g., https://big4sports.kesug.com). This is to prevent security risks such as unauthorized access or data leaks.
+
 THIS HOMEWORK WAS 50/50 BETWEEN CHARLIE AND ELLIOT 
