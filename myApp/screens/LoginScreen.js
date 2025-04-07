@@ -21,7 +21,7 @@ export default function LoginScreen({ navigation }) {
     .then(response => {
       setLoading(false);
       if (response.data.success) {
-        // Store user data as needed (e.g., in Context or AsyncStorage)
+        // Store user data as needed 
         // Navigate to HomeScreen upon successful login
         navigation.navigate('Home', { loggedInUser: username });
       } else {
