@@ -43,7 +43,13 @@ INSERT INTO `trivia` (`id`, `username`, `trivia_question`, `trivia_answer`, `dif
 (1, 'charlieknapp', 'Who won the first NFL Superbowl?', 'Green Bay Packers', 8),
 (2, 'charlieknapp', 'What does NHL stand for?', 'National Hockey League', 1),
 (4, 'egoldman', 'Who is the NBA all-time assist leader?', 'John Stockton', 6),
-(5, 'egoldman', 'Who was the first pick in the 2003 NBA draft?', 'Lebron James', 6);
+(5, 'egoldman', 'Who was the first pick in the 2003 NBA draft?', 'Lebron James', 6),
+(7, 'conorselfridge', 'Who won the World Series in 2016?', 'Chicago Cubs', 6),
+(8, 'conorselfridge', 'Who is the G.O.A.T of the NBA?', 'Michael Jordan', 1),
+(16, 'triviamaster0', 'Who holds the record for most rushing yards in a season including playoffs?', 'Saquon Barkley', 5),
+(18, 'samir1', 'How many players play defense on a baseball diamond?', '9', 2),
+(19, 'samir1', 'What is the all-time AL HR record?', '62', 8);
+
 
 -- --------------------------------------------------------
 
@@ -63,7 +69,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`username`, `password`) VALUES
 ('charlieknapp', '$2y$10$hzf7s8W150UsHgATvq7B/OAl6kNjR2YqWJ379QJ8aJCYET3w4MyFa'),
 ('charlieknapp2', '$2y$10$IcXXUDIYsyqhytA/SQFPBex5TF.ZX6L8i1iIoriNDx4PwRDEH51u2'),
-('egoldman', '$2y$10$HcqC/NrmtB6GTKMbRqOy1O3nhzxnz6o2h3zbOgAozGMiqgYRYunii');
+('conorselfridge', '$2y$10$HDYU.ask/ExRL4I3AWqTYOoIGwkKp93MJ78zQTqRV5EehieaDg3cy'),
+('egoldman', '$2y$10$HcqC/NrmtB6GTKMbRqOy1O3nhzxnz6o2h3zbOgAozGMiqgYRYunii'),
+('samir1', '$2y$10$XxaD1rb0AG7GsoDczgv1fOrFGoF4Ha3UcJSpVg7zv9nEHAkCkqrru'),
+('samir2', '$2y$10$OjCUctNztd5L/B5yWWSwYeNwIJO4Wn13bJMBwL7nR7U58XOU2NWAO'),
+('triviamaster0', '$2y$10$XIKk0XnmWHYOgvtgSYqH8Oos4Fg4Ru7t8lSRswn027s6RPeS1horW');
 
 --
 -- Indexes for dumped tables
