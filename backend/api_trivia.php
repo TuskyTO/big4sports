@@ -204,6 +204,7 @@ function handleRegister($conn, $data) {
     $stmt->bind_param("ss", $username, $password);
 
     if ($stmt->execute()) {
+        http_response_code(201);
         echo json_encode(["success" => true, "message" => "User registered"]);
     } else {
         http_response_code(500);
@@ -230,11 +231,14 @@ function handleLogin($conn, $data) {
 
     if ($row = $result->fetch_assoc()) {
         if (password_verify($password, $row['password'])) {
+            http_response_code(201);
             echo json_encode(["success" => true, "username" => $username]);
         } else {
+            http_response_code(401);
             echo json_encode(["error" => "Invalid credentials"]);
         }
     } else {
+        http_response_code(401);
         echo json_encode(["error" => "User not found"]);
     }
 
@@ -260,6 +264,7 @@ function handleCreateTrivia($conn, $data) {
     );
 
     if ($stmt->execute()) {
+        http_response_code(201);
         echo json_encode([
             "success" => true,
             "insert_id" => $stmt->insert_id
