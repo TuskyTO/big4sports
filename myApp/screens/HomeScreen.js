@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Alert
 } from 'react-native';
 import axios from 'axios';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function HomeScreen({ navigation, route }) {
   const { loggedInUser } = route.params || {};
@@ -21,9 +22,12 @@ export default function HomeScreen({ navigation, route }) {
 }, [loggedInUser]);
   
 
-  useEffect(() => {
-    fetchTrivia();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchTrivia();
+    }, [])
+  );
+
 
   // Fetch all trivia items from the backend
   const fetchTrivia = () => {
