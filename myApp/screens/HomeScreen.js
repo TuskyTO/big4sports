@@ -65,10 +65,17 @@ export default function HomeScreen({ navigation, route }) {
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Text>Question: {item.trivia_question}</Text>
-      <Text>Answer: {item.trivia_answer}</Text>
       <Text>Difficulty: {item.difficulty}</Text>
       <Text>Created By: {item.username}</Text>
-
+      
+      {item.is_answer_revealed === 1 ? (
+      <Text>Answer: {item.trivia_answer}</Text>  // Display the answer if revealed
+    ) : (
+      <Button
+        title="Guess Answer"
+        onPress={() => navigation.navigate('ReadTrivia', { id: item.id, loggedInUser })}
+      />
+    )}
       <View style={styles.buttonRow}>
          {/* Read button */}
         <Button
