@@ -1,5 +1,4 @@
 <?php
-// Enable CORS for development 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
@@ -37,26 +36,53 @@ $conn->close();
 
 function handleGet($conn) {
     $id = isset($_GET['id']) ? intval($_GET['id']) : null;
+    $username = $_GET['username'] ?? null;
+
     if ($id) {
-        $stmt = $conn->prepare("SELECT id, trivia_question, difficulty, username, is_answer_revealed, trivia_answer FROM trivia WHERE id = ?");
+        $stmt = $conn->prepare("SELECT id, trivia_question, difficulty, username, trivia_answer FROM trivia WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
         $trivia = $result->fetch_assoc();
+        $stmt->close();
 
-        if ($trivia['is_answer_revealed'] == 0) {
-            unset($trivia['trivia_answer']);
+        if ($trivia && $username !== $trivia['username']) {
+            $checkStmt = $conn->prepare("SELECT id FROM user_trivia WHERE username = ? AND trivia_id = ?");
+            $checkStmt->bind_param("si", $username, $id);
+            $checkStmt->execute();
+            $checkResult = $checkStmt->get_result();
+        
+            if ($checkResult->num_rows === 0) {
+                unset($trivia['trivia_answer']);
+            }
+        
+            $checkStmt->close();
         }
+        
 
         echo json_encode($trivia);
-        $stmt->close();
     } else {
-        $sql = "SELECT id, trivia_question, difficulty, username, is_answer_revealed FROM trivia";
+        $sql = "SELECT id, trivia_question, difficulty, username, trivia_answer FROM trivia";
         $result = $conn->query($sql);
         $trivia_list = [];
+
         while ($row = $result->fetch_assoc()) {
+            if ($username !== $row['username']) {
+                $checkStmt = $conn->prepare("SELECT id FROM user_trivia WHERE username = ? AND trivia_id = ?");
+                $checkStmt->bind_param("si", $username, $row['id']);
+                $checkStmt->execute();
+                $checkResult = $checkStmt->get_result();
+            
+                if ($checkResult->num_rows === 0) {
+                    unset($row['trivia_answer']);
+                }
+            
+                $checkStmt->close();
+            }
+            
             $trivia_list[] = $row;
         }
+
         echo json_encode($trivia_list);
     }
     exit;
@@ -71,16 +97,15 @@ function handlePost($conn, $data) {
 
     switch ($data['action']) {
         case 'register':
-            handleRegister($conn, $data);
-            break;
+            handleRegister($conn, $data); break;
         case 'login':
-            handleLogin($conn, $data);
-            break;
+            handleLogin($conn, $data); break;
         case 'create_trivia':
-            handleCreateTrivia($conn, $data);
-            break;
+            handleCreateTrivia($conn, $data); break;
         case 'guess':
-            handleGuess($conn, $data);
+            handleGuess($conn, $data); break;
+        case 'reset_guesses':
+            handleResetGuesses($conn, $data);
             break;
         default:
             http_response_code(400);
@@ -92,7 +117,7 @@ function handlePut($conn) {
     if (!isset($_GET['id'])) {
         http_response_code(400);
         echo json_encode(["error" => "Missing id parameter"]);
-        exit;
+        return;
     }
     $id = intval($_GET['id']);
     $input = file_get_contents("php://input");
@@ -101,122 +126,70 @@ function handlePut($conn) {
     if (!isset($data['trivia_question'], $data['trivia_answer'], $data['difficulty'])) {
         http_response_code(400);
         echo json_encode(["error" => "Missing fields"]);
-        exit;
+        return;
     }
 
     $stmt = $conn->prepare("UPDATE trivia SET trivia_question = ?, trivia_answer = ?, difficulty = ? WHERE id = ?");
     $stmt->bind_param("ssii", $data['trivia_question'], $data['trivia_answer'], $data['difficulty'], $id);
-
-    if ($stmt->execute()) {
-        echo json_encode(["success" => $stmt->affected_rows > 0]);
-    } else {
-        http_response_code(500);
-        echo json_encode(["error" => $stmt->error]);
-    }
+    $stmt->execute();
+    echo json_encode(["success" => true]);
     $stmt->close();
-    exit;
 }
 
 function handleDelete($conn) {
     if (!isset($_GET['id'])) {
         http_response_code(400);
         echo json_encode(["error" => "Missing id parameter"]);
-        exit;
+        return;
     }
+
     $id = intval($_GET['id']);
     $stmt = $conn->prepare("DELETE FROM trivia WHERE id = ?");
     $stmt->bind_param("i", $id);
-
-    if ($stmt->execute()) {
-        echo json_encode(["success" => $stmt->affected_rows > 0]);
-    } else {
-        http_response_code(500);
-        echo json_encode(["error" => $stmt->error]);
-    }
+    $stmt->execute();
+    echo json_encode(["success" => true]);
     $stmt->close();
-    exit;
 }
 
 function handleRegister($conn, $data) {
-    if (!isset($data['username'], $data['password'])) {
-        http_response_code(400);
-        echo json_encode(["error" => "Missing fields"]);
-        exit;
-    }
-
     $username = $data['username'];
     $password = password_hash($data['password'], PASSWORD_DEFAULT);
-
-    $check = $conn->prepare("SELECT username FROM users WHERE username = ?");
-    $check->bind_param("s", $username);
-    $check->execute();
-    $check->store_result();
-
-    if ($check->num_rows > 0) {
-        echo json_encode(["error" => "Username already exists"]);
-        $check->close();
-        return;
-    }
-    $check->close();
-
     $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
     $stmt->bind_param("ss", $username, $password);
-
-    if ($stmt->execute()) {
-        echo json_encode(["success" => true, "message" => "User registered"]);
-    } else {
-        http_response_code(500);
-        echo json_encode(["error" => $stmt->error]);
-    }
+    $stmt->execute();
+    echo json_encode(["success" => true]);
     $stmt->close();
 }
 
 function handleLogin($conn, $data) {
-    if (!isset($data['username'], $data['password'])) {
-        http_response_code(400);
-        echo json_encode(["error" => "Missing fields"]);
-        exit;
-    }
-
     $username = $data['username'];
     $password = $data['password'];
-
     $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
-        if (password_verify($password, $row['password'])) {
-            echo json_encode(["success" => true, "username" => $username]);
-        } else {
-            http_response_code(401);
-            echo json_encode(["error" => "Invalid credentials"]);
-        }
+        echo json_encode(["success" => password_verify($password, $row['password'])]);
     } else {
         http_response_code(401);
-        echo json_encode(["error" => "User not found"]);
+        echo json_encode(["error" => "Invalid credentials"]);
     }
-
     $stmt->close();
 }
 
 function handleGuess($conn, $input) {
-    if (!isset($input['id'], $input['guess'], $input['username'])) {
-        http_response_code(400);
-        echo json_encode(["error" => "Missing parameters"]);
-        return;
-    }
-
     $id = intval($input['id']);
-    $guess = $input['guess'];
+    $guess = trim(strtolower($input['guess']));
     $username = $input['username'];
 
-    $stmt = $conn->prepare("SELECT trivia_answer, is_answer_revealed FROM trivia WHERE id = ?");
+    // Step 1: Get the correct answer
+    $stmt = $conn->prepare("SELECT trivia_answer FROM trivia WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
     $trivia = $result->fetch_assoc();
+    $stmt->close();
 
     if (!$trivia) {
         http_response_code(404);
@@ -224,33 +197,43 @@ function handleGuess($conn, $input) {
         return;
     }
 
-    $is_correct = strtolower(trim($guess)) === strtolower(trim($trivia['trivia_answer']));
+    $correct = strtolower(trim($trivia['trivia_answer'])) === $guess;
 
-    if ($is_correct) {
-        $stmt = $conn->prepare("UPDATE trivia SET is_answer_revealed = 1 WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        echo json_encode(["success" => true, "message" => "Correct! The answer is: " . $trivia['trivia_answer']]);
+    if ($correct) {
+        // Step 2: Insert into user_trivia if not already there
+        $checkStmt = $conn->prepare("SELECT id FROM user_trivia WHERE username = ? AND trivia_id = ?");
+        $checkStmt->bind_param("si", $username, $id);
+        $checkStmt->execute();
+        $checkResult = $checkStmt->get_result();
+
+        if ($checkResult->num_rows === 0) {
+            $insertStmt = $conn->prepare("INSERT INTO user_trivia (username, trivia_id) VALUES (?, ?)");
+            $insertStmt->bind_param("si", $username, $id);
+            $insertStmt->execute();
+            $insertStmt->close();
+        }
+        $checkStmt->close();
+
+        echo json_encode(["success" => true, "message" => "Correct! The answer is: {$trivia['trivia_answer']}"]);
     } else {
         echo json_encode(["success" => false, "message" => "Incorrect. Try again!"]);
     }
-
-    $stmt->close();
 }
 
-function handleCreateTrivia($conn, $data) {
-    if (!isset($data['username'], $data['trivia_question'], $data['trivia_answer'], $data['difficulty'])) {
+function handleResetGuesses($conn, $data) {
+    if (!isset($data['username'])) {
         http_response_code(400);
-        echo json_encode(["error" => "Missing fields"]);
-        exit;
+        echo json_encode(["error" => "Missing username"]);
+        return;
     }
 
-    $stmt = $conn->prepare("INSERT INTO trivia (username, trivia_question, trivia_answer, difficulty, is_answer_revealed)
-                            VALUES (?, ?, ?, ?, 0)");
-    $stmt->bind_param("sssi", $data['username'], $data['trivia_question'], $data['trivia_answer'], $data['difficulty']);
+    $username = $data['username'];
+
+    $stmt = $conn->prepare("DELETE FROM user_trivia WHERE username = ?");
+    $stmt->bind_param("s", $username);
 
     if ($stmt->execute()) {
-        echo json_encode(["success" => true, "insert_id" => $stmt->insert_id]);
+        echo json_encode(["success" => true, "message" => "All guesses reset."]);
     } else {
         http_response_code(500);
         echo json_encode(["error" => $stmt->error]);
