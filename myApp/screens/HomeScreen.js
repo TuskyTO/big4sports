@@ -15,12 +15,11 @@ export default function HomeScreen({ navigation, route }) {
   const [triviaList, setTriviaList] = useState([]);
   const [error, setError] = useState('');
 
- useEffect(() => {
+  useEffect(() => {
     if (!loggedInUser) {
-     navigation.navigate('Login');
+      navigation.navigate('Login');
     }
-}, [loggedInUser]);
-  
+  }, [loggedInUser]);
 
   useFocusEffect(
     useCallback(() => {
@@ -28,10 +27,8 @@ export default function HomeScreen({ navigation, route }) {
     }, [])
   );
 
-
-  // Fetch all trivia items from the backend
   const fetchTrivia = () => {
-    axios.get('http://10.0.2.2/big4sports/backend/api_trivia.php')
+    axios.get(`http://10.0.2.2/big4sports/backend/api_trivia.php?username=${loggedInUser}`)
       .then(response => {
         setTriviaList(response.data);
       })
@@ -41,7 +38,6 @@ export default function HomeScreen({ navigation, route }) {
       });
   };
 
-  // Delete a specific trivia item by ID
   const handleDelete = (id) => {
     Alert.alert(
       'Delete Trivia',
@@ -54,8 +50,6 @@ export default function HomeScreen({ navigation, route }) {
           onPress: () => {
             axios.delete(`http://10.0.2.2/big4sports/backend/api_trivia.php?id=${id}`)
               .then(res => {
-                console.log(res.data);
-                // Remove the deleted item from our state
                 setTriviaList(prev => prev.filter(item => item.id != id));
               })
               .catch(err => console.error(err));
@@ -65,33 +59,32 @@ export default function HomeScreen({ navigation, route }) {
     );
   };
 
-  // Render each trivia item in the FlatList
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Text>Question: {item.trivia_question}</Text>
       <Text>Difficulty: {item.difficulty}</Text>
       <Text>Created By: {item.username}</Text>
-      
-      {item.is_answer_revealed === 1 ? (
-      <Text>Answer: {item.trivia_answer}</Text>  // Display the answer if revealed
-    ) : (
-      <Button
-        title="Guess Answer"
-        onPress={() => navigation.navigate('ReadTrivia', { id: item.id, loggedInUser })}
-      />
-    )}
+
+      {item.trivia_answer ? (
+  <Text>Answer: {item.trivia_answer}</Text>
+) : (
+  <Button
+    title="Guess Answer"
+    onPress={() => navigation.navigate('ReadTrivia', { id: item.id, loggedInUser })}
+  />
+)}
+
+
       <View style={styles.buttonRow}>
-         {/* Read button */}
         <Button
           title="Read"
-          onPress={() => navigation.navigate('ReadTrivia', { id: item.id })}
+          onPress={() => navigation.navigate('ReadTrivia', { id: item.id, loggedInUser })} // ✅ fixed this
         />
-        {/* Conditionally render buttons if the logged-in user is the creator */}
         {loggedInUser === item.username && (
           <>
             <Button
               title="Update"
-              onPress={() => navigation.navigate('UpdateTrivia', { id: item.id })}
+              onPress={() => navigation.navigate('UpdateTrivia', { id: item.id, loggedInUser })}
             />
             <Button
               title="Delete"
@@ -107,16 +100,47 @@ export default function HomeScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>All Trivia</Text>
-      
+
       {error ? (
         <Text style={{ color: 'red', marginBottom: 10 }}>{error}</Text>
       ) : null}
 
-      {/* Button to create a new trivia item */}
       <Button
         title="Create New Trivia"
-        onPress={() => navigation.navigate('CreateTrivia', { loggedInUser})}
+        onPress={() => navigation.navigate('CreateTrivia', { loggedInUser })}
       />
+
+<Button
+  title="Reset My Guesses"
+  color="orange"
+  onPress={() => {
+    Alert.alert(
+      "Reset All Guesses",
+      "Are you sure you want to reset all your guesses?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Reset",
+          style: "destructive",
+          onPress: () => {
+            axios.post('http://10.0.2.2/big4sports/backend/api_trivia.php', {
+              action: 'reset_guesses',
+              username: loggedInUser
+            })
+            .then((res) => {
+              alert(res.data.message);
+              fetchTrivia();  // Refresh list
+            })
+            .catch((err) => {
+              alert("Error resetting guesses");
+              console.error(err);
+            });
+          }
+        }
+      ]
+    );
+  }}
+/>
 
       <FlatList
         data={triviaList}

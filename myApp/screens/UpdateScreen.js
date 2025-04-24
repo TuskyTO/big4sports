@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
 
 export default function UpdateScreen({ route, navigation }) {
-  const { id } = route.params;  // The ID passed from View or a list screen
+  const { id, loggedInUser } = route.params;  // The ID passed from View or a list screen
 
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -14,7 +14,7 @@ export default function UpdateScreen({ route, navigation }) {
   useEffect(() => {
     // 1. Fetch existing trivia item to populate fields
     axios
-      .get(`http://10.0.2.2/big4sports/backend/api_trivia.php?id=${id}`)
+      .get(`http://10.0.2.2/big4sports/backend/api_trivia.php?id=${id}&username=${loggedInUser}`)
       .then((response) => {
         if (response.data) {
           setQuestion(response.data.trivia_question);
