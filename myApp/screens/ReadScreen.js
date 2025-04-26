@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, Button, TextInput, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 import { useFocusEffect } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function ReadScreen({ route, navigation }) {
   const { id, loggedInUser } = route.params;
@@ -61,51 +62,91 @@ export default function ReadScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Trivia Details</Text>
-      <Text>Question: {trivia.trivia_question}</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Big4Sports</Text>
+        <FontAwesome name="trophy" size={28} color="#e6b800" style={styles.trophy} />
+      </View>
+
+      <Text style={styles.label}>Question:</Text>
+      <Text style={styles.text}>{trivia.trivia_question}</Text>
+
+      <Text style={styles.label}>Difficulty:</Text>
+      <Text style={styles.text}>{trivia.difficulty}</Text>
+
+      <Text style={styles.label}>Created By:</Text>
+      <Text style={styles.text}>{trivia.username}</Text>
 
       {trivia.trivia_answer ? (
-  <Text>Answer: {trivia.trivia_answer}</Text>
-) : (
   <>
-    <TextInput
-      placeholder="Enter your guess"
-      value={guess}
-      onChangeText={setGuess}
-      style={styles.input}
-    />
-    <Button title="Submit Guess" onPress={handleGuess} />
+    <Text style={styles.label}>Answer:</Text>
+    <Text style={styles.answer}>{trivia.trivia_answer}</Text>
   </>
-)}
+) : (
 
-
-      <Text>Difficulty: {trivia.difficulty}</Text>
-      <Text>Created By: {trivia.username}</Text>
-
-      {loggedInUser === trivia.username && (
-        <View style={styles.buttonRow}>
-          <Button
-            title="Update"
-            onPress={() => navigation.navigate('UpdateTrivia', { id: trivia.id, loggedInUser })}
+        <>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your guess"
+            value={guess}
+            onChangeText={setGuess}
           />
-          <Button
-            title="Delete"
-            color="red"
-            onPress={() => {
-              axios.delete(`http://10.0.2.2/big4sports/backend/api_trivia.php?id=${trivia.id}`)
-                .then(() => navigation.navigate('Home'))
-                .catch(err => console.error('Delete error:', err));
-            }}
-          />
-        </View>
+          <View style={styles.buttonContainer}>
+            <Button title="Submit Guess" onPress={handleGuess} />
+          </View>
+        </>
       )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
-  title: { fontSize: 24, marginBottom: 16 },
-  input: { borderWidth: 1, padding: 8, marginBottom: 12, borderRadius: 4 },
-  buttonRow: { flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }
+  answer: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#1d3557',
+  },  
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+    paddingHorizontal: 20,
+    paddingTop: 30,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 25,
+  },
+  headerText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: '#1c1c1c',
+  },
+  trophy: {
+    marginTop: 2,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 10,
+    color: '#1c1c1c',
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  input: {
+    backgroundColor: '#fff',
+    padding: 12,
+    marginTop: 10,
+    borderRadius: 8,
+    borderColor: '#ccc',
+    borderWidth: 1,
+  },
+  buttonContainer: {
+    marginTop: 15,
+  },
 });
+

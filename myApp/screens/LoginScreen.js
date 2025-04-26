@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
@@ -37,30 +38,68 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Big4Sports</Text>
+        <FontAwesome name="trophy" size={28} color="#e6b800" style={styles.trophy} />
+      </View>
+
       <TextInput
+        style={styles.input}
         placeholder="Username"
         value={username}
-        style={styles.input}
         onChangeText={setUsername}
+        autoCapitalize="none"
       />
       <TextInput
+        style={styles.input}
         placeholder="Password"
         value={password}
-        style={styles.input}
-        secureTextEntry
         onChangeText={setPassword}
+        secureTextEntry
       />
-      <Button title={loading ? 'Logging in...' : 'Login'} onPress={handleLogin} />
-      <Text style={styles.link} onPress={() => navigation.navigate('Register')}>
-        Don't have an account? Register here.
-      </Text>
+
+      <View style={styles.buttonContainer}>
+        <Button title="Login" onPress={handleLogin} />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Button title="Register Instead" onPress={() => navigation.navigate('Register')} color="#1d3557" />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: { padding: 16, flex: 1, justifyContent: 'center' },
-    title: { fontSize: 24, marginBottom: 16, textAlign: 'center' },
-  });
-  
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+    paddingHorizontal: 20,
+    paddingTop: 50,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 30,
+  },
+  headerText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: '#1c1c1c',
+  },
+  trophy: {
+    marginTop: 2,
+  },
+  input: {
+    backgroundColor: '#fff',
+    padding: 12,
+    marginBottom: 15,
+    borderRadius: 8,
+    borderColor: '#ccc',
+    borderWidth: 1,
+  },
+  buttonContainer: {
+    marginVertical: 8,
+  },
+});
