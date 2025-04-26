@@ -107,6 +107,9 @@ function handlePost($conn, $data) {
         case 'reset_guesses':
             handleResetGuesses($conn, $data);
             break;
+        case 'get_user_score':
+            handleGetUserScore($conn, $data);
+            break;
         default:
             http_response_code(400);
             echo json_encode(["error" => "Invalid action"]);
@@ -183,8 +186,8 @@ function handleGuess($conn, $input) {
     $guess = trim(strtolower($input['guess']));
     $username = $input['username'];
 
-    // Step 1: Get the correct answer
-    $stmt = $conn->prepare("SELECT trivia_answer FROM trivia WHERE id = ?");
+    // Step 1: Get the correct answer AND difficulty
+    $stmt = $conn->prepare("SELECT trivia_answer, difficulty FROM trivia WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -200,6 +203,8 @@ function handleGuess($conn, $input) {
     $correct = strtolower(trim($trivia['trivia_answer'])) === $guess;
 
     if ($correct) {
+        $difficulty = intval($trivia['difficulty']); // Points = difficulty
+
         // Step 2: Insert into user_trivia if not already there
         $checkStmt = $conn->prepare("SELECT id FROM user_trivia WHERE username = ? AND trivia_id = ?");
         $checkStmt->bind_param("si", $username, $id);
@@ -207,18 +212,37 @@ function handleGuess($conn, $input) {
         $checkResult = $checkStmt->get_result();
 
         if ($checkResult->num_rows === 0) {
-            $insertStmt = $conn->prepare("INSERT INTO user_trivia (username, trivia_id) VALUES (?, ?)");
-            $insertStmt->bind_param("si", $username, $id);
+            $insertStmt = $conn->prepare("INSERT INTO user_trivia (username, trivia_id, points) VALUES (?, ?, ?)");
+            $insertStmt->bind_param("sii", $username, $id, $difficulty);
             $insertStmt->execute();
             $insertStmt->close();
         }
         $checkStmt->close();
 
         echo json_encode(["success" => true, "message" => "Correct! The answer is: {$trivia['trivia_answer']}"]);
+        // After inserting correct guess, update highest_score if needed
+        $scoreStmt = $conn->prepare("SELECT SUM(points) as total_score FROM user_trivia WHERE username = ?");
+        $scoreStmt->bind_param("s", $username);
+        $scoreStmt->execute();
+        $scoreResult = $scoreStmt->get_result();
+        $scoreRow = $scoreResult->fetch_assoc();
+        $currentScore = intval($scoreRow['total_score']);
+        $scoreStmt->close();
+
+        $updateStmt = $conn->prepare("
+            UPDATE users
+            SET highest_score = ?
+            WHERE username = ? AND ? > highest_score
+        ");
+        $updateStmt->bind_param("isi", $currentScore, $username, $currentScore);
+        $updateStmt->execute();
+        $updateStmt->close();
+
     } else {
         echo json_encode(["success" => false, "message" => "Incorrect. Try again!"]);
     }
 }
+
 
 function handleResetGuesses($conn, $data) {
     if (!isset($data['username'])) {
@@ -267,3 +291,39 @@ function handleCreateTrivia($conn, $data) {
     $stmt->close();
 }
 
+function handleGetUserScore($conn, $data) {
+    if (!isset($data['username'])) {
+        http_response_code(400);
+        echo json_encode(["error" => "Missing username"]);
+        return;
+    }
+
+    $username = $data['username'];
+
+    // Get total current score
+    $stmt = $conn->prepare("SELECT COALESCE(SUM(points), 0) AS total_points FROM user_trivia WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $stmt->close();
+
+    $total_points = $row['total_points'] ?? 0;
+
+    // Now ALSO fetch the highest_score from users table
+    $highStmt = $conn->prepare("SELECT highest_score FROM users WHERE username = ?");
+    $highStmt->bind_param("s", $username);
+    $highStmt->execute();
+    $highResult = $highStmt->get_result();
+    $highRow = $highResult->fetch_assoc();
+    $highStmt->close();
+
+    $highest_score = $highRow['highest_score'] ?? 0;
+
+    // Now return both
+    echo json_encode([
+        "success" => true,
+        "total_points" => $total_points,
+        "highest_score" => $highest_score
+    ]);
+}
