@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import { useFocusEffect } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
+import TriviaCard from '../components/TriviaCard';
 
 export default function HomeScreen({ navigation, route }) {
   const { loggedInUser } = route.params || {};
@@ -60,88 +62,66 @@ export default function HomeScreen({ navigation, route }) {
   };
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Text>Question: {item.trivia_question}</Text>
-      <Text>Difficulty: {item.difficulty}</Text>
-      <Text>Created By: {item.username}</Text>
-
-      {item.trivia_answer ? (
-  <Text>Answer: {item.trivia_answer}</Text>
-) : (
-  <Button
-    title="Guess Answer"
-    onPress={() => navigation.navigate('ReadTrivia', { id: item.id, loggedInUser })}
-  />
-)}
-
-
-      <View style={styles.buttonRow}>
-        <Button
-          title="Read"
-          onPress={() => navigation.navigate('ReadTrivia', { id: item.id, loggedInUser })} // ✅ fixed this
-        />
-        {loggedInUser === item.username && (
-          <>
-            <Button
-              title="Update"
-              onPress={() => navigation.navigate('UpdateTrivia', { id: item.id, loggedInUser })}
-            />
-            <Button
-              title="Delete"
-              color="red"
-              onPress={() => handleDelete(item.id)}
-            />
-          </>
-        )}
-      </View>
-    </View>
+    <TriviaCard
+      trivia={item}
+      loggedInUser={loggedInUser}
+      navigation={navigation}
+      onDelete={handleDelete}
+    />
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>All Trivia</Text>
+      {/* New Fancy Title with Trophy */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Big4Sports</Text>
+        <FontAwesome name="trophy" size={28} color="#e6b800" style={styles.trophy} />
+      </View>
 
       {error ? (
         <Text style={{ color: 'red', marginBottom: 10 }}>{error}</Text>
       ) : null}
 
+      {/* Create Button */}
       <Button
         title="Create New Trivia"
         onPress={() => navigation.navigate('CreateTrivia', { loggedInUser })}
       />
 
-<Button
-  title="Reset My Guesses"
-  color="orange"
-  onPress={() => {
-    Alert.alert(
-      "Reset All Guesses",
-      "Are you sure you want to reset all your guesses?",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Reset",
-          style: "destructive",
-          onPress: () => {
-            axios.post('http://10.0.2.2/big4sports/backend/api_trivia.php', {
-              action: 'reset_guesses',
-              username: loggedInUser
-            })
-            .then((res) => {
-              alert(res.data.message);
-              fetchTrivia();  // Refresh list
-            })
-            .catch((err) => {
-              alert("Error resetting guesses");
-              console.error(err);
-            });
-          }
-        }
-      ]
-    );
-  }}
-/>
+      {/* Reset Guesses Button */}
+      <Button
+        title="Reset My Guesses"
+        color="red"
+        onPress={() => {
+          Alert.alert(
+            "Reset All Guesses",
+            "Are you sure you want to reset all your guesses?",
+            [
+              { text: "Cancel", style: "cancel" },
+              {
+                text: "Reset",
+                style: "destructive",
+                onPress: () => {
+                  axios.post('http://10.0.2.2/big4sports/backend/api_trivia.php', {
+                    action: 'reset_guesses',
+                    username: loggedInUser
+                  })
+                  .then((res) => {
+                    alert(res.data.message);
+                    fetchTrivia();  // Refresh list
+                  })
+                  .catch((err) => {
+                    alert("Error resetting guesses");
+                    console.error(err);
+                  });
+                }
+              }
+            ]
+          );
+        }}
+      />
 
+      {/* List of Trivia */}
       <FlatList
         data={triviaList}
         keyExtractor={(item) => item.id.toString()}
@@ -158,20 +138,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f2f2f2',
   },
-  title: {
-    fontSize: 22,
-    marginVertical: 10,
-    fontWeight: 'bold'
-  },
-  itemContainer: {
-    padding: 12,
-    marginBottom: 8,
-    backgroundColor: '#fff',
-    borderRadius: 4
-  },
-  buttonRow: {
+  header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10
-  }
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    marginBottom: 10,
+  },
+  headerText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: '#1c1c1c',
+  },
+  trophy: {
+    marginTop: 2,
+  },
 });

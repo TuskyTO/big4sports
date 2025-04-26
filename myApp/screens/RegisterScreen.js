@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState('');
@@ -45,38 +46,75 @@ export default function RegisterScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Big4Sports</Text>
+        <FontAwesome name="trophy" size={28} color="#e6b800" style={styles.trophy} />
+      </View>
+
       <TextInput
+        style={styles.input}
         placeholder="Username"
         value={username}
-        style={styles.input}
         onChangeText={setUsername}
+        autoCapitalize="none"
       />
       <TextInput
-        placeholder="Password (min 10 characters)"
-        value={password}
         style={styles.input}
-        secureTextEntry
+        placeholder="Password"
+        value={password}
         onChangeText={setPassword}
+        secureTextEntry
       />
       <TextInput
+        style={styles.input}
         placeholder="Confirm Password"
         value={confirm}
-        style={styles.input}
-        secureTextEntry
         onChangeText={setConfirm}
+        secureTextEntry
       />
-      <Button title={loading ? 'Registering...' : 'Register'} onPress={handleRegister} />
-      <Text style={styles.link} onPress={() => navigation.navigate('Login')}>
-        Already have an account? Login here.
-      </Text>
+
+      <View style={styles.buttonContainer}>
+        <Button title="Register" onPress={handleRegister} />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Button title="Login Instead" onPress={() => navigation.navigate('Login')} color="#1d3557" />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16, flex: 1, justifyContent: 'center' },
-  title: { fontSize: 24, marginBottom: 16, textAlign: 'center' },
-  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 12, borderRadius: 4 },
-  link: { color: 'blue', marginTop: 12, textAlign: 'center' }
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+    paddingHorizontal: 20,
+    paddingTop: 50,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 30,
+  },
+  headerText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: '#1c1c1c',
+  },
+  trophy: {
+    marginTop: 2,
+  },
+  input: {
+    backgroundColor: '#fff',
+    padding: 12,
+    marginBottom: 15,
+    borderRadius: 8,
+    borderColor: '#ccc',
+    borderWidth: 1,
+  },
+  buttonContainer: {
+    marginVertical: 8,
+  },
 });

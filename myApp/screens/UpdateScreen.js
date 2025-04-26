@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function UpdateScreen({ route, navigation }) {
   const { id, loggedInUser } = route.params;  // The ID passed from View or a list screen
@@ -58,43 +59,69 @@ export default function UpdateScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Update Trivia</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Big4Sports</Text>
+        <FontAwesome name="trophy" size={28} color="#e6b800" style={styles.trophy} />
+      </View>
 
-      <Text>Question:</Text>
       <TextInput
         style={styles.input}
-        value={question}
-        onChangeText={setQuestion}
+        placeholder="Trivia Question"
+        value={trivia_question}
+        onChangeText={setTrivia_question}
       />
-
-      <Text>Answer:</Text>
       <TextInput
         style={styles.input}
-        value={answer}
-        onChangeText={setAnswer}
+        placeholder="Trivia Answer"
+        value={triviaAnswer}
+        onChangeText={setTriviaAnswer}
       />
-
-      <Text>Difficulty (1-10):</Text>
       <TextInput
         style={styles.input}
+        placeholder="Difficulty (1-10)"
         value={difficulty}
         onChangeText={setDifficulty}
         keyboardType="numeric"
       />
 
-      <Button title="Save Changes" onPress={handleUpdate} />
+      <View style={styles.buttonContainer}>
+        <Button title="Update Trivia" onPress={updateTrivia} />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
-  title: { fontSize: 20, marginBottom: 8 },
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+    paddingHorizontal: 20,
+    paddingTop: 30,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 25,
+  },
+  headerText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: '#1c1c1c',
+  },
+  trophy: {
+    marginTop: 2,
+  },
   input: {
-    borderWidth: 1,
-    padding: 8,
-    marginBottom: 12,
-    borderRadius: 4,
+    backgroundColor: '#fff',
+    padding: 12,
+    marginBottom: 15,
+    borderRadius: 8,
     borderColor: '#ccc',
+    borderWidth: 1,
+  },
+  buttonContainer: {
+    marginTop: 15,
   },
 });

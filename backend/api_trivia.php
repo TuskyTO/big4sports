@@ -241,3 +241,29 @@ function handleResetGuesses($conn, $data) {
 
     $stmt->close();
 }
+
+function handleCreateTrivia($conn, $data) {
+    if (!isset($data['username'], $data['trivia_question'], $data['trivia_answer'], $data['difficulty'])) {
+        http_response_code(400);
+        echo json_encode(["error" => "Missing fields"]);
+        return;
+    }
+
+    $username = $data['username'];
+    $trivia_question = $data['trivia_question'];
+    $trivia_answer = $data['trivia_answer'];
+    $difficulty = intval($data['difficulty']);
+
+    $stmt = $conn->prepare("INSERT INTO trivia (username, trivia_question, trivia_answer, difficulty) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $username, $trivia_question, $trivia_answer, $difficulty);
+    $stmt->execute();
+
+    if ($stmt->affected_rows > 0) {
+        echo json_encode(["success" => true, "message" => "Trivia created successfully"]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Failed to create trivia"]);
+    }
+
+    $stmt->close();
+}
+
