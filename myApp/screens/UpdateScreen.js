@@ -67,14 +67,14 @@ export default function UpdateScreen({ route, navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Trivia Question"
-        value={trivia_question}
-        onChangeText={setTrivia_question}
+        value={question}
+        onChangeText={setQuestion}
       />
       <TextInput
         style={styles.input}
         placeholder="Trivia Answer"
-        value={triviaAnswer}
-        onChangeText={setTriviaAnswer}
+        value={answer}
+        onChangeText={setAnswer}
       />
       <TextInput
         style={styles.input}
@@ -85,7 +85,7 @@ export default function UpdateScreen({ route, navigation }) {
       />
 
       <View style={styles.buttonContainer}>
-        <Button title="Update Trivia" onPress={updateTrivia} />
+      <Button title="Update Trivia" onPress={handleUpdate} />
       </View>
     </View>
   );
