@@ -184,3 +184,29 @@ A NOTE ON OUR CORS HEADERS:
 For the purposes of this homework assignment, we're using the wildcard (*) for CORS during development. This allows our React Native app or any other client to access your backend without restriction. While this is fine for development, in a production environment we would want to restrict the allowed origins to only trusted domains (e.g., https://big4sports.kesug.com). This is to prevent security risks such as unauthorized access or data leaks.
 
 THIS HOMEWORK WAS 50/50 BETWEEN CHARLIE AND ELLIOT 
+
+________________________________________________________________________________________________________________________________________________________________________________________
+
+Hw4:
+For the final piece of our presentation, we decided to add the following:
+
+- A "guessing" feature to allow users to guess answers to the questions created by other users
+- A "scoring" feature that awards users a certain number of points for answering a question correctly (depending on the questions difficulty)
+- A "reset" feature which resets all existing guesses that have been made by a user. Their current "score" will reset to 0, while the highscore remains
+- Styling all of our mobile frontend to have a bulky, retro sports theme. 
+
+How the guessing feature works:
+When a user submits a guess for a trivia question, the backend checks if their answer matches the correct answer; if it does, it records the question as correctly answered in the user_trivia table along with the question’s difficulty points. This allows each user to unlock and reveal answers independently, accumulate their own score, and update their highest score if their new total exceeds their previous best.
+
+How the scoring feature works:
+When a user correctly answers a trivia question, they earn points equal to that question's difficulty (e.g., difficulty 3 = 3 points), which are stored in the user_trivia table. Their current total score is calculated by summing all their earned points, and if it exceeds their all-time highest_score stored in the users table, the highest score is updated.
+
+How the reset feature works:
+The reset feature deletes all rows from the user_trivia table for the logged-in user, which removes all record of which questions they've answered and their earned points. This causes their current score to reset to 0, while their all-time highest score (stored in the users table) remains unchanged.
+
+How the styling works:
+All our styling is done using React Native's StyleSheet.create function inside each screen. Each screen (HomeScreen, Login, Register, Read, Update) defines a local styles object with reusable class names like container, header, input, and buttonContainer. The app uses consistent fonts, background colors, and layout to match a retro sports theme, styled manually in each screen file. We also created a theme.js file holding shared color constants (red/yellow/green difficulty, background, text colors). For icons, you're using FontAwesome for sports-style trophies next to your titles to tie it all together.
+
+HOW TO SETUP/RUN OUR APP:
+The same steps from hw3! 
+
