@@ -210,3 +210,5 @@ All our styling is done using React Native's StyleSheet.create function inside e
 HOW TO SETUP/RUN OUR APP:
 The same steps from hw3! 
 
+This homework was completed 50/50 by Elliot and Charlie 
+
