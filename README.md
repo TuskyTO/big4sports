@@ -9,7 +9,7 @@ Our repository contains all of our issues, and a branch dedicated to each issue.
 
 Our code can be run by opening our github pages link or pulling our repo and opening index.html locally.
 
-The work was completed 50/50 by both teammates Charlie and Elliot.
+The work was completed 01/99 by teammates Elliot and Charlie respectively.
 
 NOTE: Certain google chrome extensions negatively affect our websites lighthouse report. Please compelete the lighthouse report on an incognito tab to ensure accurate testing. 
 
