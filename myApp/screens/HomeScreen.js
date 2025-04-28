@@ -16,6 +16,9 @@ export default function HomeScreen({ navigation, route }) {
   const { loggedInUser } = route.params || {};
   const [triviaList, setTriviaList] = useState([]);
   const [error, setError] = useState('');
+  const [score, setScore] = useState(0);
+  const [highestScore, setHighestScore] = useState(0);
+  const [loadingScore, setLoadingScore] = useState(true);
 
   useEffect(() => {
     if (!loggedInUser) {
@@ -26,6 +29,7 @@ export default function HomeScreen({ navigation, route }) {
   useFocusEffect(
     useCallback(() => {
       fetchTrivia();
+      fetchScore();
     }, [])
   );
 
@@ -38,6 +42,26 @@ export default function HomeScreen({ navigation, route }) {
         console.error(err);
         setError(err.message);
       });
+  };
+
+  const fetchScore = () => {
+    setLoadingScore(true);
+    axios.post('http://10.0.2.2/big4sports/backend/api_trivia.php', {
+      action: 'get_user_score',
+      username: loggedInUser
+    })
+    .then(response => {
+      if (response.data.success) {
+        setScore(response.data.total_points);
+        setHighestScore(response.data.highest_score);
+      }
+    })
+    .catch(err => {
+      console.error("Error fetching score:", err);
+    })
+    .finally(() => {
+      setLoadingScore(false);
+    });
   };
 
   const handleDelete = (id) => {
@@ -78,6 +102,16 @@ export default function HomeScreen({ navigation, route }) {
         <FontAwesome name="trophy" size={28} color="#e6b800" style={styles.trophy} />
       </View>
 
+      {/* Display Scores */}
+      {loadingScore ? (
+        <Text style={styles.score}>Loading Score...</Text>
+      ) : (
+        <View style={styles.scoresContainer}>
+          <Text style={styles.score}>Your Score: {score}</Text>
+          <Text style={styles.highestScore}>Highest Score: {highestScore}</Text>
+        </View>
+      )}
+
       {error ? (
         <Text style={{ color: 'red', marginBottom: 10 }}>{error}</Text>
       ) : null}
@@ -108,7 +142,8 @@ export default function HomeScreen({ navigation, route }) {
                   })
                   .then((res) => {
                     alert(res.data.message);
-                    fetchTrivia();  // Refresh list
+                    fetchTrivia();  
+                    fetchScore();   
                   })
                   .catch((err) => {
                     alert("Error resetting guesses");
@@ -143,7 +178,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 15,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   headerText: {
     fontSize: 28,
@@ -152,6 +187,21 @@ const styles = StyleSheet.create({
     color: '#1c1c1c',
   },
   trophy: {
+    marginTop: 2,
+  },
+  scoresContainer: {
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  score: {
+    fontSize: 18,
+    color: '#1c1c1c',
+    textAlign: 'center',
+  },
+  highestScore: {
+    fontSize: 16,
+    color: '#555',
+    textAlign: 'center',
     marginTop: 2,
   },
 });
