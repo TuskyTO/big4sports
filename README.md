@@ -9,7 +9,7 @@ Our repository contains all of our issues, and a branch dedicated to each issue.
 
 Our code can be run by opening our github pages link or pulling our repo and opening index.html locally.
 
-The work was completed 01/99 by teammates Elliot and Charlie respectively.
+The work was completed 50/50 by both teammates Elliot and Charlie.
 
 NOTE: Certain google chrome extensions negatively affect our websites lighthouse report. Please compelete the lighthouse report on an incognito tab to ensure accurate testing. 
 
@@ -210,5 +210,5 @@ All our styling is done using React Native's StyleSheet.create function inside e
 HOW TO SETUP/RUN OUR APP:
 The same steps from hw3! 
 
-This homework was completed 50/50 by Elliot and Charlie 
+This homework was completed 01/99 by Elliot and Charlie respectively.
 
