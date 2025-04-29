@@ -191,7 +191,7 @@ Hw4:
 For Testing, the test code has been added to our repo on Github. The Instructions to run it are below. 
 
 HOW TO SETUP/RUN OUR TESTS:
-* Make sure you have the latest version of our project from Github
+* Make sure you have the latest version of our project from Github 
 1. Make sure XAMPP is installed and our big4sports folder is pasted into /Applications/XAMPP/xamppfiles/htdocs/big4sports/backend
 2. Open terminal and go to the backend folder: "cd /Applications/XAMPP/xamppfiles/htdocs/big4sports/backend"
 3. Download Composer using XAMPP’s version of PHP: "/Applications/XAMPP/xamppfiles/bin/php composer-setup.php" (You may have run /Applications/XAMPP/xamppfiles/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" first before running this line)
