@@ -160,6 +160,7 @@ function handleRegister($conn, $data) {
     $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
+    http_response_code(201);
     echo json_encode(["success" => true]);
     $stmt->close();
 }
@@ -173,6 +174,7 @@ function handleLogin($conn, $data) {
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
+        http_response_code(201);
         echo json_encode(["success" => password_verify($password, $row['password'])]);
     } else {
         http_response_code(401);

@@ -1,1 +1,1 @@
-{"version":1,"defects":{"UserTest::testPost_CreateUser":7,"UserTest::testPost_LoginUser":7,"UserTest::testPost_FailedLogin":7},"times":{"UserTest::testGet_UserList":0.008,"UserTest::testPost_CreateUser":0.102,"UserTest::testPost_LoginUser":0.062,"UserTest::testPost_FailedLogin":0.003}}
+{"version":1,"defects":{"UserTest::testPost_CreateUser":7,"UserTest::testPost_LoginUser":7,"UserTest::testPost_FailedLogin":7},"times":{"UserTest::testGet_UserList":0.015,"UserTest::testPost_CreateUser":0.087,"UserTest::testPost_LoginUser":0.067,"UserTest::testPost_FailedLogin":0.002}}
