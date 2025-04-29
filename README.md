@@ -203,9 +203,9 @@ HOW TO SETUP/RUN OUR TESTS:
 9. If all the tests pass, you'll see: OK (4 tests, 4 assertions)
 
 
-HOW WE USED AI: For this last homwork assignment, we used AI for a couple different things:
-1. I used ChatGPT to guide me through creating and running some of the unit tests for my PHP backend using PHPUnit. Mainley, ChatGPT helped debug errors in installation, composer setup, and test failures by providing corrected code snippets and precise terminal commands
-2. I also used ChatGPT to help out with some of the final styling that I mention below. See the TriviaCard.js file for the code that ChatGPT helped us write
+HOW WE USED AI: 
+We used ChatGPT to when creating and running some of the unit tests for my PHP backend using PHPUnit. Mainley, ChatGPT helped debug errors in installation, composer setup, and test failures by providing corrected code snippets and precise terminal commands. It helped us realize that we were using an earlier version of PHPUnit and needed to download the latest version. It helped us realize why the User test was failing when repeating the test a second time, and that we had to delete the existing user newUser123 to correctly run the test again. It even helped write out the exact steps in our readme for running the tests!
+
 
 
 For the final piece of our app, we decided to add the following:
