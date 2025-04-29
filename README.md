@@ -201,6 +201,7 @@ HOW TO SETUP/RUN OUR TESTS:
 7. MAKE SURE "newUser123" is deleted from the users table in the backend or else 1 of 4 tests will not work
 8. Open the XAMPP control panel and start Apache and MySQL. From your backend folder in Terminal, run this command: "/Applications/XAMPP/xamppfiles/bin/php ./vendor/bin/phpunit tests/UserTest.php" (This step runs the tests)
 9. If all the tests pass, you'll see: OK (4 tests, 4 assertions)
+*NOTE: Sometimes terminal acts weird, and requires you to do step 8 and then step 4. Try it in the intended chronology first and if that doesn't work you may need to update PHPUnit a second time* 
 
 
 HOW WE USED AI: 
