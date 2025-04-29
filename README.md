@@ -188,7 +188,7 @@ THIS HOMEWORK WAS 50/50 BETWEEN CHARLIE AND ELLIOT
 ________________________________________________________________________________________________________________________________________________________________________________________
 
 Hw4:
-For the final piece of our presentation, we decided to add the following:
+For the final piece of our app, we decided to add the following:
 
 - A "guessing" feature to allow users to guess answers to the questions created by other users
 - A "scoring" feature that awards users a certain number of points for answering a question correctly (depending on the questions difficulty)
