@@ -195,10 +195,10 @@ HOW TO SETUP/RUN OUR TESTS:
 1. Make sure XAMPP is installed and our big4sports folder is pasted into /Applications/XAMPP/xamppfiles/htdocs/big4sports/backend
 2. Open terminal and go to the backend folder: "cd /Applications/XAMPP/xamppfiles/htdocs/big4sports/backend"
 3. Download Composer using XAMPP’s version of PHP: "/Applications/XAMPP/xamppfiles/bin/php composer-setup.php" (You may have run /Applications/XAMPP/xamppfiles/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" first before running this line)
-4. Install PHPUnit version 10.5 (compatible with PHP 8.2): "/Applications/XAMPP/xamppfiles/bin/php composer.phar require --dev phpunit/phpunit:^10.5 -W"
+4. You must install the latest version of PHPUnit, version 10.5 (compatible with PHP 8.2): "/Applications/XAMPP/xamppfiles/bin/php composer.phar require --dev phpunit/phpunit:^10.5 -W"
 5. You should now see a vendor/ folder created — this contains PHPUnit
 6. Make sure XAMPP is running.
-7. MAKE SURE "newUser123" is deleted from the users table in the backend or else tests will not work
+7. MAKE SURE "newUser123" is deleted from the users table in the backend or else 1 of 4 tests will not work
 8. Open the XAMPP control panel and start Apache and MySQL. From your backend folder in Terminal, run this command: "/Applications/XAMPP/xamppfiles/bin/php ./vendor/bin/phpunit tests/UserTest.php" (This step runs the tests)
 9. If all the tests pass, you'll see: OK (4 tests, 4 assertions)
 
